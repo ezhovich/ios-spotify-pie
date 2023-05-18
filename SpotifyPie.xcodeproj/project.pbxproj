@@ -90,11 +90,6 @@
 		C525D4382A14D4DC005391B7 = {
 			isa = PBXGroup;
 			children = (
-				C57894772A161ECE00E614C6 /* ResultView.swift */,
-				C57894702A151B7500E614C6 /* API.swift */,
-				C578946E2A1512CB00E614C6 /* AuthData.swift */,
-				C57894792A16222800E614C6 /* TopTracksData.swift */,
-				C578947D2A165F3E00E614C6 /* TopArtistsData.swift */,
 				C525D4432A14D4DC005391B7 /* SpotifyPie */,
 				C525D4542A14D4DE005391B7 /* SpotifyPieTests */,
 				C525D45E2A14D4DE005391B7 /* SpotifyPieUITests */,
@@ -115,10 +110,11 @@
 		C525D4432A14D4DC005391B7 /* SpotifyPie */ = {
 			isa = PBXGroup;
 			children = (
+				C57894702A151B7500E614C6 /* API.swift */,
 				C525D4442A14D4DC005391B7 /* SpotifyPieApp.swift */,
-				C525D4462A14D4DC005391B7 /* ContentView.swift */,
+				C57894802A169D4300E614C6 /* Data */,
+				C578947F2A169D2D00E614C6 /* Views */,
 				C57894762A161A0C00E614C6 /* PieChart */,
-				C525D46E2A14E0C8005391B7 /* AuthView.swift */,
 				C525D4482A14D4DE005391B7 /* Assets.xcassets */,
 				C525D44A2A14D4DE005391B7 /* Preview Content */,
 			);
@@ -154,9 +150,29 @@
 			isa = PBXGroup;
 			children = (
 				C57894722A16158600E614C6 /* PieSliceView.swift */,
+				C57894772A161ECE00E614C6 /* ResultView.swift */,
 				C57894742A1615E700E614C6 /* PieChartView.swift */,
 			);
 			path = PieChart;
+			sourceTree = "<group>";
+		};
+		C578947F2A169D2D00E614C6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C525D4462A14D4DC005391B7 /* ContentView.swift */,
+				C525D46E2A14E0C8005391B7 /* AuthView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C57894802A169D4300E614C6 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C578946E2A1512CB00E614C6 /* AuthData.swift */,
+				C578947D2A165F3E00E614C6 /* TopArtistsData.swift */,
+				C57894792A16222800E614C6 /* TopTracksData.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

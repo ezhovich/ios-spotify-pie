@@ -150,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				C57894722A16158600E614C6 /* PieSliceView.swift */,
-				C57894772A161ECE00E614C6 /* ResultView.swift */,
 				C57894742A1615E700E614C6 /* PieChartView.swift */,
 			);
 			path = PieChart;
@@ -161,6 +160,7 @@
 			children = (
 				C525D4462A14D4DC005391B7 /* ContentView.swift */,
 				C525D46E2A14E0C8005391B7 /* AuthView.swift */,
+				C57894772A161ECE00E614C6 /* ResultView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

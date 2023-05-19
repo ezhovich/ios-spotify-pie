@@ -71,6 +71,7 @@ struct ContentView: View {
                 
                 if isPiePresented{
                     ResultView(accessToken: accessToken!, term: selectedTerm, category: selectedCategory)
+                    var _ = print("!!")
                 }
                 
             

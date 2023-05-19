@@ -19,12 +19,11 @@ struct ResultView: View {
     @State var topArtists : [String]? = nil
     @State var topGenres : [String]? = nil
     @State var topGenresCount : [Double]? = nil
+    @State var refreshFlag: Bool = false
     
-    @State var flag = false
     
     func refreshPie(){
-        var _ = print("!!!", Date().timeIntervalSince1970)
-        var _ = api.getPieStats(accessToken: accessToken, term: term){res, e in
+        api.getPieStats(accessToken: accessToken, term: term){res, e in
             var tmpG : [String] = []
             var tmpC : [Double] = []
             let sortedByValueDictionary = res!.sorted { $0.1 > $1.1 }
@@ -35,33 +34,24 @@ struct ResultView: View {
             topGenres = tmpG
             topGenresCount = tmpC
         }
+        api.getTopTracks(accessToken: accessToken, term: term){res, e in
+            var tracks : [String] = []
+            for e in res!{
+                tracks.append(e)
+            }
+            topTracks = tracks
+            print(tracks)
+        }
+        api.getTopArtists(accessToken: accessToken, term: term){res, e in
+            var artists : [String] = []
+            for e in res!{
+                artists.append(e)
+            }
+            topArtists = artists
+        }
     }
     
     var body: some View {
-        
-        if category == "tracks"{
-            var _ = api.getTopTracks(accessToken: accessToken, term: term){res, e in
-                var tracks : [String] = []
-                for e in res!{
-                    tracks.append(e)
-                }
-                topArtists = nil
-                topTracks = tracks
-            }
-            var _ = refreshPie()
-        }
-        
-        if category == "artists"{
-            var _ = api.getTopArtists(accessToken: accessToken, term: term){res, e in
-                var artists : [String] = []
-                for e in res!{
-                    artists.append(e)
-                }
-                topArtists = artists
-                topTracks = nil
-            }
-            var _ = refreshPie()
-        }
         
         ScrollView{
             if topGenresCount != nil{
@@ -72,14 +62,14 @@ struct ResultView: View {
                 .frame(height: 650)
             }
             
-            if topTracks != nil{
+            if topTracks != nil && category == "tracks"{
                 Text("Top 10 Tracks").font(.title)
                 ForEach((0...9), id: \.self){
                     Text(topTracks![$0]).font(Font.caption.weight(weights[$0])).padding(1)
                 }
             }
             
-            if topArtists != nil{
+            if topArtists != nil && category == "artists"{
                 Text("Top 10 Artists").font(.title)
                 ForEach((0...9), id: \.self){
                     Text(topArtists![$0]).font(Font.caption.weight(weights[$0])).padding(1)
@@ -87,6 +77,15 @@ struct ResultView: View {
                 
                 
             }
+        }.onChange(of: term){ _ in
+            refreshFlag.toggle()
+        }.onChange(of: category){ _ in
+            refreshFlag.toggle()
+        }.onChange(of: refreshFlag){ _ in
+            refreshPie()
+        }
+        .onAppear{
+            refreshFlag.toggle()
         }
     }
     

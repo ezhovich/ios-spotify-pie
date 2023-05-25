@@ -14,7 +14,10 @@ struct ContentView: View {
     let terms = ["4 weeks", "6 months", "2 years"]
     let categories = ["tracks", "artists"]
     
-    @State private var isPresented = false
+    let spotifyGreen = Color(red: 0.114, green: 0.725, blue: 0.329) // #1db954
+    let spotifyGray = Color(red: 0.129, green: 0.129, blue: 0.129) // #212121)
+    
+    @State private var isAuthPresented = false
     @State var accessToken : String? = nil
     @State var isPiePresented = false
     
@@ -27,21 +30,32 @@ struct ContentView: View {
                         ForEach(categories, id: \.self){ category in
                             Text(category)
                         }
-                    }.pickerStyle(.segmented)
+                    }
+                    .pickerStyle(.segmented)
+                    .colorMultiply(spotifyGreen)
+                    .tint(.white)
                 } header: {
                     Text("pie based on")
+                        .foregroundColor(Color.black)
                 }
                 
                 Section{
                     Picker("term", selection: $selectedTerm){
                         ForEach(terms, id: \.self){ term in
                             Text(term)
+                                .foregroundColor(Color.white)
                         }
-                    }.pickerStyle(.segmented)
+                    }
+                    .pickerStyle(.segmented)
+                    .colorMultiply(spotifyGreen)
                 } header: {
                     Text("within last ")
+                        .foregroundColor(Color.black)
                 }
                 
+                Spacer()
+                Spacer()
+
                 
                 Section{
                     HStack{
@@ -51,33 +65,31 @@ struct ContentView: View {
                                 print("PIE:")
                                 isPiePresented = true
                             } label: {
-                                HStack{
-                                    Spacer()
-                                    Text("Bake!")
-                                    Spacer()
-                                }
+                                Text("Bake!")
                             }
+                            .buttonStyle(.borderedProminent)
+                            .foregroundColor(spotifyGray)
+                            .tint(spotifyGreen)
+                            Spacer()
                         } else {
                             Button{
-                                isPresented = true
+                                isAuthPresented = true
                             } label: {
                                 Text("Login to spotify")
                             }
-                            .tint(.green)
+                            .buttonStyle(.borderedProminent)
+                            .foregroundColor(spotifyGray)
+                            .tint(spotifyGreen)
                             Spacer()
                         }
                     }
                 }
-                
                 if isPiePresented{
                     ResultView(accessToken: accessToken!, term: selectedTerm, category: selectedCategory)
-                    var _ = print("!!")
                 }
-                
-            
-            }
-        }.sheet(isPresented: $isPresented) {
-            AuthView(isPresented: $isPresented, accessToken: $accessToken)
+            }.background(.white)
+        }.sheet(isPresented: $isAuthPresented) {
+            AuthView(isPresented: $isAuthPresented, accessToken: $accessToken)
         }
     }
 }

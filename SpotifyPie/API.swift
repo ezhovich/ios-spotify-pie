@@ -9,8 +9,8 @@ import Foundation
 
 struct API{
     func getAccessToken(code: String, completionHandler: @escaping (String?, Error?) -> Void){
-        let clientId = "d382f23bf98d4dd59bf022470da81d10"
-        let secretKey = "61f207fd18ce4834a15e055d5fc02964"
+        let clientId = ""
+        let secretKey = ""
         let authKey = "Basic \((clientId + ":" + secretKey).data(using: .utf8)!.base64EncodedString())"
         let requestHeaders: [String:String] = ["Authorization": authKey,
                                                 "Content-Type": "application/x-www-form-urlencoded"]
